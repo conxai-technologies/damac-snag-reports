@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Consolidated snag results (Manual + AI)</title>
+<style>
+:root{
+  --page:#eef0ee; --surface:#ffffff;
+  --ink:#14171a; --ink2:#4d545c; --muted:#858d95;
+  --line:#dcdfdc; --line2:#eaece9;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);
+  font:15px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:760px;margin:0 auto;padding:48px 22px 90px}
+.eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  font-weight:700;margin:0 0 6px}
+h1{font-size:32px;line-height:1.1;margin:0 0 8px;letter-spacing:-.02em;font-weight:680}
+.subline{color:var(--ink2);font-size:13.5px;margin:0 0 34px;
+  padding-bottom:18px;border-bottom:2px solid var(--ink)}
+a.card{display:block;background:var(--surface);border:1px solid var(--line);border-radius:12px;
+  padding:18px 20px;margin-bottom:14px;text-decoration:none;color:inherit;
+  transition:border-color .12s}
+a.card:hover{border-color:var(--ink2)}
+.unit{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:21px;font-weight:700;
+  letter-spacing:-.02em}
+.meta{color:var(--ink2);font-size:12.8px;margin-top:5px;line-height:1.7}
+.meta b{color:var(--ink)}
+.gen{color:var(--muted);font-size:12px;margin-top:30px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">Snag detection evaluation · Manual vs CONXAI</p>
+  <h1>Consolidated snag results</h1>
+  <p class="subline">Every snag raised by either method, reconciled into one list per unit.</p>
+
+  <a class="card" href="snag_results_Q844.html">
+    <div class="unit">Unit Q844</div>
+    <div class="meta">Consolidated entries <b>512</b> · Manual snags <b>341</b> · AI snags <b>218</b><br>
+    Evidence <b>884</b> photos, <b>72</b> panoramas</div>
+  </a>
+
+  <a class="card" href="snag_results_Q845.html">
+    <div class="unit">Unit Q845</div>
+    <div class="meta">Consolidated entries <b>420</b> · Manual snags <b>250</b> · AI snags <b>204</b><br>
+    Evidence <b>792</b> photos, <b>72</b> panoramas</div>
+  </a>
+
+  <a class="card" href="snag_results_Q545.html">
+    <div class="unit">Unit Q545</div>
+    <div class="meta">Consolidated entries <b>466</b> · Manual snags <b>341</b> · AI snags <b>156</b><br>
+    Evidence <b>809</b> photos, <b>59</b> panoramas</div>
+  </a>
+
+  <p class="gen">Generated 2026-08-26</p>
+</div>
+</body>
+</html>
