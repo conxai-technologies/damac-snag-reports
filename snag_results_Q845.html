@@ -167,8 +167,10 @@ dialog#lb button{background:#fff;border:none;border-radius:7px;padding:6px 10px;
 dialog#lb img{max-width:100%;max-height:calc(94vh - 80px);display:block;cursor:zoom-in}
 dialog#lb img.actual{max-width:none;max-height:none;cursor:zoom-out}
 :focus-visible{outline:2px solid var(--focus);outline-offset:2px}
-@media (min-width:1081px){table{min-width:1760px}}
-@media (max-width:1080px){
+@media (min-width:1361px){table{min-width:1320px}}
+tbody tr{content-visibility:auto;contain-intrinsic-size:auto 170px}
+@media print{tbody tr{content-visibility:visible}}
+@media (max-width:1360px){
   .statgrid{grid-template-columns:1fr}
   table,thead,tbody,tr,td{display:block;width:100%}
   thead{display:none}
@@ -751,8 +753,45 @@ gap between shaft cover and shaft need to be filled</p></td><td class="c-ai-pic"
   function validReview(v){return v==='yes'||v==='no'||v==='unverified';}
   function paintSelect(s){s.classList.remove('review-yes','review-no','review-unverified');s.classList.add('review-'+s.value);}
   function setSaveNote(text,bad){var n=document.getElementById('save-note');n.textContent=text;n.style.color=bad?'var(--no)':'';}
-  function persist(){try{localStorage.setItem(storageKey,JSON.stringify(state));setSaveNote('Saved in this browser',false);}catch(e){setSaveNote('Storage unavailable — export now',true);}}
-  function queuePersist(){clearTimeout(saveTimer);setSaveNote('Saving…',false);saveTimer=setTimeout(persist,250);}
+  function persist(){try{localStorage.setItem(storageKey,JSON.stringify(state));setSaveNote('Saved in this browser',false);phSync();}catch(e){setSaveNote('Storage unavailable — export now',true);phSync();}}
+  
+var PH_HOST='https://eu.i.posthog.com',PH_KEY='phc_kSkh7vpuDeG6hHyGUBUBpbgLRy3VwSzmZNJ5yuZDJ9pn';
+var syncedKey=storageKey+':synced',reviewerKey='snageval-reviewer',syncTimer=null;
+var synced=(function(){try{return JSON.parse(localStorage.getItem(syncedKey))||{};}catch(e){return{};}})();
+function reviewerName(){try{return (localStorage.getItem(reviewerKey)||'').trim();}catch(e){return'';}}
+function clientId(){try{var v=localStorage.getItem('snageval-client-id');if(!v){v='c-'+Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem('snageval-client-id',v);}return v;}catch(e){return'c-anon';}}
+function entrySig(e){return e.review+' '+String(e.comment||'');}
+function phSync(){clearTimeout(syncTimer);syncTimer=setTimeout(phFlush,900);}
+function phFlush(){
+  var batch=[],now=new Date().toISOString(),who=reviewerName();
+  Object.keys(state.entries).forEach(function(id){
+    var e=state.entries[id];if(!e)return;
+    if(synced[id]===entrySig(e))return;
+    batch.push({event:'snag_review',distinct_id:who||clientId(),timestamp:now,properties:{
+      unit:meta.unit,source_fingerprint:meta.source_fingerprint,review_id:id,
+      review:e.review,comment:String(e.comment||''),reviewer:who,client_id:clientId(),
+      $current_url:location.href}});
+  });
+  if(!batch.length)return;
+  fetch(PH_HOST+'/batch/',{method:'POST',keepalive:true,headers:{'Content-Type':'text/plain'},
+    body:JSON.stringify({api_key:PH_KEY,batch:batch})})
+  .then(function(r){if(!r.ok)throw new Error(r.status);
+    batch.forEach(function(ev){synced[ev.properties.review_id]=entrySig({review:ev.properties.review,comment:ev.properties.comment});});
+    try{localStorage.setItem(syncedKey,JSON.stringify(synced));}catch(e){}
+    setSaveNote('Saved in this browser · synced',false);})
+  .catch(function(){setSaveNote('Saved locally · sync pending (retrying)',true);clearTimeout(syncTimer);syncTimer=setTimeout(phFlush,15000);});
+}
+document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')phFlush();});
+setTimeout(phFlush,1500);
+(function(){var ex=document.getElementById('review-export');if(!ex)return;
+  var inp=document.createElement('input');inp.type='text';inp.id='reviewer-name';
+  inp.placeholder='Reviewer name';inp.value=reviewerName();inp.setAttribute('aria-label','Reviewer name');
+  inp.style.cssText='font:inherit;font-size:12.5px;padding:6px 9px;border:1px solid var(--line);border-radius:8px;max-width:150px;background:var(--surface);color:var(--ink)';
+  inp.addEventListener('change',function(){try{localStorage.setItem(reviewerKey,inp.value.trim());}catch(e){}
+    Object.keys(synced).forEach(function(k){delete synced[k];});phSync();});
+  ex.parentNode.insertBefore(inp,ex);})();
+
+function queuePersist(){clearTimeout(saveTimer);setSaveNote('Saving…',false);saveTimer=setTimeout(persist,250);}
   function entryFor(r){var id=r.dataset.reviewId,v=state.entries[id];if(!v||!validReview(v.review))v={review:'unverified',comment:''};return{review:v.review,comment:String(v.comment||'')};}
   var src='all';
   rows.forEach(function(r){var v=entryFor(r),s=r.querySelector('.review-select'),c=r.querySelector('.review-comment');s.value=v.review;c.value=v.comment;r.dataset.review=v.review;paintSelect(s);r._t=[].slice.call(r.cells,0,6).map(function(td){return td.textContent;}).join(' ').toLowerCase();
