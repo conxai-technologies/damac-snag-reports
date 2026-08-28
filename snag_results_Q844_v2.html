@@ -197,6 +197,28 @@ tbody tr{content-visibility:auto;contain-intrinsic-size:auto 170px}
 </style>
 
 <style>
+/* --- Snag Coverage and Stats: compact overrides -------------------------
+   The inherited head styles `.mini div`, which also matches each tile's .k/.v/.s
+   children, so every tile drew a box inside a box inside a box. Scope the box to
+   .tile and flatten the rest. */
+/* 170px lands 3-up in the right column (3+2) rather than 4+1, which left a
+   lone Snag Yield tile with a gap beside it. */
+.mini{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px}
+.mini>div,.mini .tile{background:var(--panel);border:1px solid var(--line2);
+  border-radius:8px;padding:9px 11px}
+.mini .tile>div{background:none;border:0;border-radius:0;padding:0}
+.mini .k{font-size:9.5px;letter-spacing:.08em;margin:0}
+.mini .v{font-size:19px;margin:2px 0 1px;line-height:1.15}
+.mini .s{font-size:11px;line-height:1.35}
+.stats li{padding:6px 0;gap:11px}
+.stats .n{font-size:19px;min-width:2.6em;text-align:right}
+.stats .lb{font-size:13px;line-height:1.4}
+.stats .qual{font-size:11px}
+.methnote{font-size:11.5px;line-height:1.5;margin-top:6px}
+.methbox{margin-top:10px;font-size:11.5px}
+.methbox>summary{cursor:pointer;user-select:none;color:var(--muted);font-weight:650;
+  letter-spacing:.02em}
+.methbox[open]>summary{margin-bottom:2px}
 .ib{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.02em;padding:2px 8px;border-radius:99px;margin-right:6px}
 .i-addr{background:#e5f5e9;color:#1c7c3a}.i-part{background:#fdf3dc;color:#93690a}
 .i-miss{background:#fbe4e4;color:#b3261e}.i-excl{background:#ececf2;color:#5b5b6b}
@@ -270,10 +292,9 @@ For those rooms the <a href="snag_results_Q844.html">v1 page</a> remains the onl
         <span><i class="sw s-ai"></i> Partially covered</span>
         <span><i class="sw s-man"></i> Not covered / not assessable</span>
       </div>
-      <div class="mini"><div><div class="k">Fully covered</div><div class="v">77%</div><div class="s">of the 328 manual snags</div></div><div><div class="k">Reached</div><div class="v">93%</div><div class="s">covered or partially covered</div></div></div>
-      <div class="mini"><div title='Wording may differ from the manual text; acting on the AI entries must perform the repair, at the right place.'><div class="k">Snag Recall 1</div><div class="v">90%</div><div class="s">correct repair, trade and location (321 assessable snags)</div></div><div title='Stricter: same element, same problem, recognisably the same finding.'><div class="k">Snag Recall 2</div><div class="v">80%</div><div class="s">an AI entry describes the identical defect</div></div></div>
-      <div class="mini"><div title='Counts the recommended list. Audited false positives removed; the band is the borderline calls.'><div class="k">Snag Yield</div><div class="v">537&ndash;590 vs 328</div><div class="s">AI vs manual snags, one object counted once (1.6&ndash;1.8&times;)</div></div></div>
-      <p class="methnote"><b>How these numbers are measured.</b> An independent reviewer checks every manual snag against the AI repair list, without being told which method raised what, and rules it covered, partially covered or not covered on whether a contractor working that list would fix it &mdash; not on matching wording. <b>Snag Recall&nbsp;1</b> asks whether the AI entries define the correct repair work, trade and location; <b>Snag Recall&nbsp;2</b> additionally requires one of them to describe the identical defect. <b>Snag Yield</b> counts one physical object as one snag on both sides, over the recommended list, with audited false positives removed. Snags no photograph can settle &mdash; a tap test, an operation check, an element out of the camera's view &mdash; are set aside as <i>not assessable</i> and listed, never dropped. The recommended list is what was legible enough in the photographs to act on; a sampled review found that tier substantially more likely to be worth fixing than the rest, which are kept in their own section below.</p>
+      <div class="mini"><div class="tile"><div class="k">Fully covered</div><div class="v">77%</div><div class="s">of the 328 manual snags</div></div><div class="tile"><div class="k">Reached</div><div class="v">93%</div><div class="s">covered or partially covered</div></div><div class="tile" title='Wording may differ from the manual text; acting on the AI entries must perform the repair, at the right place.'><div class="k">Snag Recall 1</div><div class="v">90%</div><div class="s">correct repair, trade and location (321 assessable snags)</div></div><div class="tile" title='Stricter: same element, same problem, recognisably the same finding.'><div class="k">Snag Recall 2</div><div class="v">80%</div><div class="s">an AI entry describes the identical defect</div></div><div class="tile" title='Counts the recommended list. Audited false positives removed; the band is the borderline calls.'><div class="k">Snag Yield</div><div class="v">537&ndash;590 vs 328</div><div class="s">AI vs manual snags, one object counted once (1.6&ndash;1.8&times;)</div></div></div>
+      <details class="methbox"><summary>How these numbers are measured</summary>
+      <p class="methnote">An independent reviewer checks every manual snag against the AI repair list, without being told which method raised what, and rules it covered, partially covered or not covered on whether a contractor working that list would fix it &mdash; not on matching wording. <b>Snag Recall&nbsp;1</b> asks whether the AI entries define the correct repair work, trade and location; <b>Snag Recall&nbsp;2</b> additionally requires one of them to describe the identical defect. <b>Snag Yield</b> counts one physical object as one snag on both sides, over the recommended list, with audited false positives removed. Snags no photograph can settle &mdash; a tap test, an operation check, an element out of the camera's view &mdash; are set aside as <i>not assessable</i> and listed, never dropped. The recommended list is what was legible enough in the photographs to act on; a sampled review found that tier substantially more likely to be worth fixing than the rest, which are kept in their own section below.</p></details>
 
     </div>
   </div>
