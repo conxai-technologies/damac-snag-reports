@@ -285,6 +285,7 @@ col.w-ai-pic{width:10%}col.w-ai{width:24%}col.w-review{width:8%}col.w-comment{wi
 .prov{color:#93690a;font-weight:700;cursor:help}
 .dot.p-none{background:transparent;border:1px dashed #b6bcc2}
 .methnote{font-size:12.5px;color:var(--muted);margin-top:8px;max-width:72ch}
+.validbar{margin:0 0 18px;padding:12px 16px;border:1px solid #e3cf9a;background:#fdf7e8;border-radius:10px;font-size:13.5px;line-height:1.5}
 .scopebar{margin:0 0 18px;padding:12px 16px;border:1px solid #cfd8e8;background:#f2f6fd;border-radius:10px;font-size:13.5px;line-height:1.5}
 </style>
 <body>
@@ -305,20 +306,19 @@ col.w-ai-pic{width:10%}col.w-ai{width:24%}col.w-review{width:8%}col.w-comment{wi
     </div>
     <div class="provenance">
     Rooms inspected <b>16 of 16</b> &middot; plus <b>1</b> with no manual counterpart &middot; manual snags checked <b>341</b> of <b>341</b><br>
-    Recommended repair list <b>545</b> scheduling lines &mdash; room &times; defect type, not a snag count &middot; Severity <b>High 90</b> &middot; <b>Medium 311</b> &middot; <b>Low 141</b> &middot; <b>Unrated 3</b><br>
-    Built from the <b>1037</b> findings seen in the photo<br>
     Pipeline <b>run-5</b> &middot; Generated <b>2026-08-28</b>
     </div>
   </div>
 </div>
 
 <div class="scopebar"><b>Whole unit &mdash; all 16 rooms inspected.</b> All 341 manual snags checked against the AI repair list. Supersedes the <a href="snag_results_Q545.html">v1 page</a>.</div>
+<div class="validbar"><b>All data on this page is produced by automated review and needs to be verified and validated by a DAMAC reviewer.</b> Use the <b>Review</b> column on each row to record yes / no / unverified and a note, then export the review file.</div>
 
 <section>
   <h2>Snag Coverage and Stats</h2>
   <div class="card statgrid">
     <ul class="stats">
-      <li><span class="n">261</span><span class="lb">of 341 manual snags fully covered by the AI inspection<span class="qual">an independent reviewer checked each manual snag against the AI repair list</span></span></li>
+      <li><span class="n">261</span><span class="lb">of 341 manual snags fully covered by the AI inspection<span class="qual">matched by an automated reviewer working only from the two lists &mdash; to be validated by DAMAC</span></span></li>
       <li><span class="n">54</span><span class="lb">partially covered &mdash; the AI list brings the repair team to the right element</span></li>
       <li><span class="n">11</span><span class="lb">not covered by the AI inspection</span></li>
       <li><span class="n">15</span><span class="lb">cannot be assessed from photos<span class="qual">needs tap test 10 &middot; not visible in photos 5</span></span></li>
@@ -352,16 +352,16 @@ col.w-ai-pic{width:10%}col.w-ai{width:24%}col.w-review{width:8%}col.w-comment{wi
       captured by AI with complete semantic alignment: description, trade, snag
       classification, location and priority.<br>
       <b>True positives</b> &mdash; AI snags matched to a manual snag, plus the
-      share of AI-only snags a reviewer confirmed as real defects on the evidence
+      share of AI-only snags an automated reviewer confirmed as real defects on the evidence
       photograph.<br>
-      <b>False positives</b> &mdash; AI snags a reviewer ruled <i>not a defect</i>
+      <b>False positives</b> &mdash; AI snags an automated reviewer ruled <i>not a defect</i>
       on the photograph. Absence from the manual list is not evidence of a false
       positive: the manual walk is not a record of what is undamaged.<br>
       <b>Snag Yield</b> &mdash; true positives &divide; manual snag count &times; 100.
       Above 100% the AI list adds more real snags than the manual walk logged.</p>
       </details>
       <details class="methbox"><summary>How these numbers are measured</summary>
-      <p class="methnote">An independent reviewer checks every manual snag against the AI repair list, without being told which method raised what, and rules it covered, partially covered or not covered on whether a contractor working that list would fix it &mdash; not on matching wording. <b>Snag Recall&nbsp;1</b> asks whether the AI entries define the correct repair work, trade and location; <b>Snag Recall&nbsp;2</b> additionally requires one of them to describe the identical defect. <b>Snag Yield</b> counts one physical object as one snag on both sides, over the recommended list, with audited false positives removed. Snags no photograph can settle &mdash; a tap test, an operation check, an element out of the camera's view &mdash; are set aside as <i>not assessable</i> and listed, never dropped. The recommended list is what was legible enough in the photographs to act on; a sampled review found that tier substantially more likely to be worth fixing than the rest, which are kept in their own section below.</p></details>
+      <p class="methnote"><b>Every figure on this page is produced by automated review and requires verification and validation by a DAMAC reviewer.</b> The matching is done by an AI reviewer that sees only the two lists, not which method raised what, and rules each manual snag covered, partially covered or not covered on whether a contractor working the AI list would fix it &mdash; not on matching wording. <b>Snag Recall&nbsp;1</b> asks whether the AI entries define the correct repair work, trade and location; <b>Snag Recall&nbsp;2</b> additionally requires one of them to describe the identical defect. <b>Snag Yield</b> counts one physical object as one snag on both sides, over the recommended list, with audited false positives removed. Snags no photograph can settle &mdash; a tap test, an operation check, an element out of the camera's view &mdash; are set aside as <i>not assessable</i> and listed, never dropped. The recommended list is what was legible enough in the photographs to act on; a sampled review found that tier substantially more likely to be worth fixing than the rest, which are kept in their own section below.</p></details>
 
     </div>
   </div>
@@ -988,7 +988,7 @@ col.w-ai-pic{width:10%}col.w-ai{width:24%}col.w-review{width:8%}col.w-comment{wi
   <p id="empty" hidden style="color:var(--muted);padding:18px">No entries match the current filters.</p>
 </section>
 
-<section class="wo"><h2>Trade Work Orders</h2><p class="methnote">One line per defect type per room, distinct locations only. An asterisk marks a severity CONXAI derived from how sibling defect types are rated, awaiting DAMAC’s review (90 of 545 lines).</p>
+<section class="wo"><h2>Trade Work Orders</h2><p class="methnote"><b>545</b> scheduling lines &mdash; one per defect type per room, distinct locations only. This is a scheduling unit, not a snag count: one line can cover several physical spots. Severity <b>High 90</b> &middot; <b>Medium 311</b> &middot; <b>Low 141</b> &middot; <b>Unrated 3</b>. Built from the <b>1037</b> findings seen in the photo. An asterisk marks a severity CONXAI derived from how sibling defect types are rated, awaiting DAMAC’s review (90 of 545 lines).</p>
 <h3>Aluminum <span style="font-weight:500;color:var(--muted)">(59 locations)</span></h3><div class="card" style="padding:0;overflow-x:auto"><table><thead><tr><th>Severity</th><th>Room</th><th>Defect</th><th>Locations</th></tr></thead><tbody>
 <tr><td class="sev-H">High</td><td>BEDROOM 1</td><td>Curtain wall / window frames &amp; glazing — Finishing / workmanship quality</td><td>1</td></tr>
 <tr><td class="sev-H">High</td><td>BEDROOM 1</td><td>Curtain wall / window frames &amp; glazing — Cracked</td><td>1</td></tr>
