@@ -305,7 +305,7 @@ col.w-ai-pic{width:10%}col.w-ai{width:24%}col.w-review{width:8%}col.w-comment{wi
     </div>
     <div class="provenance">
     Rooms inspected <b>16 of 16</b> &middot; plus <b>1</b> with no manual counterpart &middot; manual snags checked <b>341</b> of <b>341</b><br>
-    Recommended repair list <b>545</b> work items &middot; Severity <b>High 90</b> &middot; <b>Medium 311</b> &middot; <b>Low 141</b> &middot; <b>Unrated 3</b><br>
+    Recommended repair list <b>545</b> scheduling lines &mdash; room &times; defect type, not a snag count &middot; Severity <b>High 90</b> &middot; <b>Medium 311</b> &middot; <b>Low 141</b> &middot; <b>Unrated 3</b><br>
     Built from the <b>1037</b> findings seen in the photo<br>
     Pipeline <b>run-5</b> &middot; Generated <b>2026-08-28</b>
     </div>
@@ -331,7 +331,30 @@ col.w-ai-pic{width:10%}col.w-ai{width:24%}col.w-review{width:8%}col.w-comment{wi
         <span><i class="sw s-ai"></i> Partially covered</span>
         <span><i class="sw s-man"></i> Not covered / not assessable</span>
       </div>
-      <div class="mini"><div class="tile"><div class="k">Fully covered</div><div class="v">77%</div><div class="s">of the 341 manual snags</div></div><div class="tile"><div class="k">Reached</div><div class="v">92%</div><div class="s">covered or partially covered</div></div><div class="tile" title='Wording may differ from the manual text; acting on the AI entries must perform the repair, at the right place.'><div class="k">Snag Recall 1</div><div class="v">90%</div><div class="s">correct repair, trade and location (326 assessable snags)</div></div><div class="tile" title='Stricter: same element, same problem, recognisably the same finding.'><div class="k">Snag Recall 2</div><div class="v">81%</div><div class="s">an AI entry describes the identical defect</div></div><div class="tile" title='Counts the recommended list. Audited false positives removed; the band is the borderline calls.'><div class="k">Snag Yield</div><div class="v">400&ndash;453 vs 341</div><div class="s">AI vs manual snags, one object counted once (1.2&ndash;1.3&times;)</div></div></div>
+      <div class="mini"><div class="tile" title='One object counted once, however many observations describe it.'><div class="k">AI-logged snags</div><div class="v">486</div><div class="s">physical objects with a photo-confirmed finding</div></div><div class="tile" title='Matched by an independent reviewer on meaning, not wording.'><div class="k">Common to both</div><div class="v">257</div><div class="s">AI objects matched to one of the 341 manual snags</div></div><div class="tile" title='Mostly snags the manual walk did not log, not AI errors - which is why false positives are audited on the photo instead.'><div class="k">AI only</div><div class="v">229</div><div class="s">no manual counterpart</div></div><div class="tile"><div class="k">Manual only</div><div class="v">26</div><div class="s">11 missed by AI, 15 not assessable from photos</div></div><div class="tile" title='Wording may differ from the manual text; acting on the AI entries must perform the repair, at the right place.'><div class="k">Snag Recall 1</div><div class="v">90%</div><div class="s">correct repair, trade and location (326 assessable snags)</div></div><div class="tile" title='Stricter: same element, same problem, recognisably the same finding.'><div class="k">Snag Recall 2</div><div class="v">81%</div><div class="s">an AI entry describes the identical defect</div></div><div class="tile" title='The band is the borderline calls: the low bound counts only clearly actionable findings.'><div class="k">True positives</div><div class="v">400&ndash;453</div><div class="s">matched, plus the audited-real share of AI-only</div></div><div class="tile" title='Ruled on the evidence photo by the standard of a premium-villa handover - not by absence from the manual list.'><div class="k">False positives</div><div class="v">33</div><div class="s">14% audited noise rate on the 229 AI-only</div></div><div class="tile" title='Above 100% means the AI list adds more real snags than the manual walk logged.'><div class="k">Snag Yield</div><div class="v">117%&ndash;133%</div><div class="s">400&ndash;453 true positives &divide; 341 manual snags</div></div></div>
+      <details class="methbox"><summary>Glossary &mdash; what each figure counts</summary>
+      <p class="methnote">Every figure in the block above counts <b>one physical
+      object as one snag</b>, on both sides, so the lines add up:
+      common + AI&nbsp;only + manual&nbsp;only = the consolidated defect list.
+      Two counts elsewhere on this page deliberately use a different unit and are
+      labelled where they appear: <b>scheduling lines</b> (room &times; defect type)
+      in the work-order roll-up, and <b>table rows</b> in the consolidated list,
+      where one object may answer more than one manual snag.<br>
+      <b>Snag Recall&nbsp;1</b> &mdash; the percentage of manually logged snags
+      captured by AI with a useful description, defining the correct repair work,
+      correct trade and location.<br>
+      <b>Snag Recall&nbsp;2</b> &mdash; the percentage of manually logged snags
+      captured by AI with complete semantic alignment: description, trade, snag
+      classification, location and priority.<br>
+      <b>True positives</b> &mdash; AI snags matched to a manual snag, plus the
+      share of AI-only snags a reviewer confirmed as real defects on the evidence
+      photograph.<br>
+      <b>False positives</b> &mdash; AI snags a reviewer ruled <i>not a defect</i>
+      on the photograph. Absence from the manual list is not evidence of a false
+      positive: the manual walk is not a record of what is undamaged.<br>
+      <b>Snag Yield</b> &mdash; true positives &divide; manual snag count &times; 100.
+      Above 100% the AI list adds more real snags than the manual walk logged.</p>
+      </details>
       <details class="methbox"><summary>How these numbers are measured</summary>
       <p class="methnote">An independent reviewer checks every manual snag against the AI repair list, without being told which method raised what, and rules it covered, partially covered or not covered on whether a contractor working that list would fix it &mdash; not on matching wording. <b>Snag Recall&nbsp;1</b> asks whether the AI entries define the correct repair work, trade and location; <b>Snag Recall&nbsp;2</b> additionally requires one of them to describe the identical defect. <b>Snag Yield</b> counts one physical object as one snag on both sides, over the recommended list, with audited false positives removed. Snags no photograph can settle &mdash; a tap test, an operation check, an element out of the camera's view &mdash; are set aside as <i>not assessable</i> and listed, never dropped. The recommended list is what was legible enough in the photographs to act on; a sampled review found that tier substantially more likely to be worth fixing than the rest, which are kept in their own section below.</p></details>
 
